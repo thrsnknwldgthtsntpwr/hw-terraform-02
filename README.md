@@ -28,8 +28,19 @@
 
 1. Изучите проект. В файле variables.tf объявлены переменные для Yandex provider.
 2. Создайте сервисный аккаунт и ключ. [service_account_key_file](https://terraform-provider.yandexcloud.net).
+```
+yc iam key create --service-account-name terraform-hw02 --output authorized_key.json --folder-id b1g8idjusu652hr2ocgh
+```
 4. Сгенерируйте новый или используйте свой текущий ssh-ключ. Запишите его открытую(public) часть в переменную **vms_ssh_public_root_key**.
+```
+ssh-keygen -t ed25519
+```
 5. Инициализируйте проект, выполните код. Исправьте намеренно допущенные синтаксические ошибки. Ищите внимательно, посимвольно. Ответьте, в чём заключается их суть.
+```
+terraform init
+terraform plan
+terraform apply
+```
 6. Подключитесь к консоли ВМ через ssh и выполните команду ``` curl ifconfig.me```.
 Примечание: К OS ubuntu "out of a box, те из коробки" необходимо подключаться под пользователем ubuntu: ```"ssh ubuntu@vm_ip_address"```. Предварительно убедитесь, что ваш ключ добавлен в ssh-агент: ```eval $(ssh-agent) && ssh-add``` Вы познакомитесь с тем как при создании ВМ создать своего пользователя в блоке metadata в следующей лекции.;
 8. Ответьте, как в процессе обучения могут пригодиться параметры ```preemptible = true``` и ```core_fraction=5``` в параметрах ВМ.
@@ -40,6 +51,14 @@
 - скриншот консоли, curl должен отобразить тот же внешний ip-адрес;
 - ответы на вопросы.
 
+![Скриншот_консоли](img/img1.png)
+![Скриншот_ЛК_ЯО](img/img2.png)
+
+> Первая ошибка, с которой столкнулся при выполнении terraform apply была "Platform "standart-v4" not found". Делаю вывод, что такой конфигурации в облаке нет, меняю на standard-v2
+> Вторая ошибка - the specified number of cores is not available on platform "standard-v2"; allowed core number: 2, 4. Меняю параметр на 2
+
+> preemptible = true создает прерываемую ВМ, стоимость которой гораздо ниже, чем полноценной ВМ
+> core_fraction = 5 - тоже для тех же целей - снизить стоимость вычислительных ресурсов, т.к. ресурсы создаются исключительно для обучения, а не продакшена
 
 ### Задание 2
 
