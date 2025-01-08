@@ -58,3 +58,24 @@ variable "vm_db_core-fraction" {
   default     = 20
   description = "cpu usage max"
 }
+
+
+variable vms_resources {
+  type = map(object({
+    cores = number
+    memory = number
+    core_fraction = number
+  }))
+    default = {
+      "web" = {
+        cores = 2
+        memory = 1
+        core_fraction = 5
+      },
+      "db" = {
+        cores = 2
+        memory = 2
+        core_fraction = 20
+      }
+  }
+}
