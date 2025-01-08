@@ -151,4 +151,28 @@ locals {
 5. Найдите и закоментируйте все, более не используемые переменные проекта.
 6. Проверьте terraform plan. Изменений быть не должно.
 
+```
+variable vms_resources {
+  type = map(object({
+    cores = number
+    memory = number
+    core_fraction = number
+  }))
+    default = {
+      "web" = {
+        cores = 2
+        memory = 1
+        core_fraction = 5
+      },
+      "db" = {
+        cores = 2
+        memory = 2
+        core_fraction = 20
+      }
+  }
+}
+```
+
+![terraform apply img](img/img4.png)
+
 ------
