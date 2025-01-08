@@ -73,14 +73,34 @@ terraform apply
 2. Скопируйте блок ресурса и создайте с его помощью вторую ВМ в файле main.tf: **"netology-develop-platform-db"** ,  ```cores  = 2, memory = 2, core_fraction = 20```. Объявите её переменные с префиксом **vm_db_** в том же файле ('vms_platform.tf').  ВМ должна работать в зоне "ru-central1-b"
 3. Примените изменения.
 
+![Скриншот_ЛК_ЯО](img/img3.png)
 
 ### Задание 4
 
 1. Объявите в файле outputs.tf **один** output , содержащий: instance_name, external_ip, fqdn для каждой из ВМ в удобном лично для вас формате.(без хардкода!!!)
 2. Примените изменения.
 
-В качестве решения приложите вывод значений ip-адресов команды ```terraform output```.
+В качестве решения приложите вывtод значений ip-адресов команды ```terraform output```.
 
+```
+thrsnknwldgthtsntpwr@ubnt:~/NETOLOGY/hw-terraform-02$ terraform output
+instance_name = [
+  {
+    "web" = [
+      "89.169.151.222",
+      "fhmjkfcj1dsqce5vn4cs.auto.internal",
+      "netology-develop-platform-web",
+    ]
+  },
+  {
+    "db" = [
+      "158.160.1.165",
+      "epd1sqmij0tiop8a4v1m.auto.internal",
+      "netology-develop-platform-db",
+    ]
+  },
+]
+```
 
 ### Задание 5
 
